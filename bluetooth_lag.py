@@ -10,21 +10,25 @@ M12=8
 M21=9
 M22=10
 
-def F():
+def F():                   """Rotates both the DC motors attached to a motor controller with their
+                             maximum  speed  for 5 seconds"""
+    
     GPIO.output(M11,GPIO.HIGH)
     GPIO.output(M21,GPIO.HIGH)
     time.sleep(5)
     GPIO.output(M11,GPIO.LOW)
     GPIO.output(M21,GPIO.LOW)
 
-def S():
+def S():                         """  Rotates both the DC motors attached to a motor controller with 50% of their
+                                      maximum  speed  """
+    
     pwm1.ChangeDutyCycle(50)
     pwm2.ChangeDutyCycle(50)
     GPIO.output(M11,GPIO.HIGH)
     GPIO.output(M21,GPIO.HIGH)
     time.sleep(5)
 
-def T():
+def T():                       """ Stops the motors that run with S() and then rotates then rotates thwm wth their maximum speed"""
     GPIO.output(M11,GPIO.LOW)
     GPIO.output(M21,GPIO.LOW)
     pwm1.ChangeDutyCycle(100)
@@ -33,7 +37,7 @@ def T():
     GPIO.output(M21,GPIO.HIGH)
     time.sleep(5)
 
-def L():
+def L():                       """ Stops the motors : Using here to stop motors that were running After execution of T() """
     GPIO.output(M11,GPIO.LOW)
     GPIO.output(M21,GPIO.LOW)
     GPIO.cleanup()

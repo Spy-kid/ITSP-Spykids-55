@@ -7,6 +7,9 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 Phase=0
+
+#Assigning Raspberry board pin numbers 
+
 Front_left=7
 Front_right=11
 Back_left=9
@@ -20,13 +23,15 @@ m12=23
 m21=24
 m22=25
 
+#Funcntions to move our bot in different directions
+#1
 def left_side_forward():
-    print ("FORWARD LEFT")
-    p.ChangeDutyCycle(3.1)
-    time.sleep(0.5)
-    p.ChangeDutyCycle(0)
-    q.ChangeDutyCycle(3.1)
-    time.sleep(0.5)
+    print ("FORWARD LEFT") #to check whether the function is called or not !
+    p.ChangeDutyCycle(3.1) #changing angle of servo motors
+    time.sleep(0.5) 
+    p.ChangeDutyCycle(0)   #p , q ,r , s are declared below (at line 524 )
+    q.ChangeDutyCycle(3.1)  
+    time.sleep(0.5) 
     q.ChangeDutyCycle(0)
     r.ChangeDutyCycle(3.1)
     time.sleep(0.5)
@@ -34,7 +39,7 @@ def left_side_forward():
     s.ChangeDutyCycle(3.1)
     time.sleep(0.5)
     s.ChangeDutyCycle(0)
-    pwm1.ChangeDutyCycle(100)
+    pwm1.ChangeDutyCycle(100) #rotating dc motors at full speed
     pwm2.ChangeDutyCycle(100)
     pwm3.ChangeDutyCycle(100)
     pwm4.ChangeDutyCycle(100)
@@ -60,7 +65,8 @@ def left_side_forward():
         GPIO.output(Back_right,GPIO.LOW)
         GPIO.output(Front_left,GPIO.HIGH)
         GPIO.output(Front_right,GPIO.HIGH)
-        time.sleep(0.00172)
+        time.sleep(0.00172)                    #calculated as to bring a phase difference of 90 degrees 
+                                               #(subject to change during test flights)
         GPIO.output(Front_left,GPIO.LOW)
         GPIO.output(Front_right,GPIO.LOW)
         pwm1.ChangeDutyCycle(70)
@@ -75,7 +81,7 @@ def left_side_forward():
 def right_side_forward():
     print ("FORWARD RIGHT")
     p.ChangeDutyCycle(3.1)
-    time.sleep(0.5)
+    time.sleep(0.5)                  #Similar to above function
     p.ChangeDutyCycle(0)
     q.ChangeDutyCycle(3.1)
     time.sleep(0.5)
@@ -98,7 +104,7 @@ def right_side_forward():
        GPIO.output(Front_right,GPIO.LOW)
        GPIO.output(Back_left,GPIO.LOW)
        GPIO.output(Back_right,GPIO.LOW)
-       pwm3.ChangeDutyCycle(70)
+       pwm3.ChangeDutyCycle(70)               # Rotating DC motors at only 70% of their max speed
        pwm4.ChangeDutyCycle(70)
        GPIO.output(Front_left,GPIO.HIGH)
        GPIO.output(Front_right,GPIO.HIGH)
@@ -525,7 +531,9 @@ r.ChangeDutyCycle(0)
 s.start(2.5)
 s.ChangeDutyCycle(0)
 
-server_socket=bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+#CODE FOR BLUETOOTH COMMUNICATION
+
+server_socket=bluetooth.BluetoothSocket(bluetooth.RFCOMM)    
 port=1
 server_socket.bind(("",port))
 server_socket.listen(1)
@@ -538,6 +546,8 @@ while 1:
 
       print("received [%s]" % data)
 
+    #calling functions with one letter inputs
+    
       if(data == b'F'):
         forward()
 

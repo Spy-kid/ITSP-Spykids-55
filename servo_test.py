@@ -5,19 +5,19 @@ import RPi.GPIO as GPIO
 
 def zero():
     print("zero")
-    p.ChangeDutyCycle(9.4)
+    p.ChangeDutyCycle(9.4)    #9.4 for 60 degrees rotation
     time.sleep(0.5)
     p.ChangeDutyCycle(0)
 
 def full():
     print("full")
-    p.ChangeDutyCycle(11)
+    p.ChangeDutyCycle(11)    #11 for 180 degrees rotation
     time.sleep(0.5)
     p.ChangeDutyCycle(0)
 
 def thirty():
     print("thirty")
-    p.ChangeDutyCycle(3.1)
+    p.ChangeDutyCycle(3.1)  #3.1 for 30 degrees rotation
     time.sleep(0.5)
     p.ChangeDutyCycle(0)
 
